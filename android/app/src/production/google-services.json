@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "482941168543",
+    "project_id": "hallopak-b5985",
+    "storage_bucket": "hallopak-b5985.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482941168543:android:36e932af02650898fa6baa",
+        "android_client_info": {
+          "package_name": "com.lightsoft.hallopak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482941168543-rd6evafopfrvekqlf4qbu3jjuu8bmpvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsbN5CPxw2kXAOckm54h90JJLlV0Tw5_M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482941168543-rd6evafopfrvekqlf4qbu3jjuu8bmpvo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "482941168543-pr8c89n9vvmfsfho5fql3ucdt5lbglk0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hallolighsofttsoft.dacomhallopak.hallopak"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
