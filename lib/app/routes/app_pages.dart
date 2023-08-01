@@ -1,10 +1,25 @@
 import 'package:get/get.dart';
-import 'package:hallopak/app/modules/login/views/splash_screen_view.dart';
 
+import '../modules/cari_satpam/bindings/cari_satpam_binding.dart';
+import '../modules/cari_satpam/views/cari_satpam_view.dart';
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
+import '../modules/complaint/bindings/complaint_binding.dart';
+import '../modules/complaint/views/complaint_view.dart';
+import '../modules/form_profile/bindings/form_profile_binding.dart';
+import '../modules/form_profile/views/form_profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/notification/bindings/notification_binding.dart';
+import '../modules/notification/views/notification_view.dart';
+import '../modules/register/bindings/register_binding.dart';
+import '../modules/register/views/register_view.dart';
+import '../modules/slpash_screen/bindings/slpash_screen_binding.dart';
+import '../modules/slpash_screen/views/slpash_screen_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -21,12 +36,43 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => RegisterView(),
+      binding: RegisterBinding(),
     ),
     GetPage(
       name: _Paths.SPLASH_SCREEN,
       page: () => const SplashScreenView(),
+      binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORM_PROFILE,
+      page: () => const FormProfileView(),
+      binding: FormProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMPLAINT,
+      page: () => const ComplaintView(),
+      binding: ComplaintBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => const ChatView(),
+      binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.CARI_SATPAM,
+      page: () => const CariSatpamView(),
+      binding: CariSatpamBinding(),
     ),
   ];
 }

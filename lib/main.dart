@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import 'app/config/inital_binding.dart';
+import 'app/data/providers/local_storage.dart';
 import 'app/routes/app_pages.dart';
 import 'firebase_options.dart';
 import 'firebase_options_dev.dart';
 import 'flavors.dart';
 
 Future<void> prepare({Flavor? flavor}) async {
+  await Get.put(LocalStorage()).initStorage();
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
@@ -25,11 +28,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Simpel",
+      title: "Hallopak",
       initialRoute: AppPages.INITIAL,
+      initialBinding: InitialBinding(),
       getPages: AppPages.routes,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: const Color(0xFFFEFEFF),
       ),
     );
   }

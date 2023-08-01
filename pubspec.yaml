@@ -7,10 +7,15 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  cloud_firestore: 4.8.3
+  firebase_auth: 4.7.1
   firebase_core: 2.15.0
+  firebase_storage: 11.2.5
   get: 4.6.5
+  get_storage: 2.1.1
   flutter:
     sdk: flutter
+  image_picker: 0.8.6+4
 
 dev_dependencies:
   flutter_lints: 2.0.2
@@ -23,6 +28,24 @@ flutter:
 
   assets:
     - assets/images/logo/
+    - assets/images/image/
+
+  fonts:
+    - family: BentonSans-Regular
+      fonts:
+        - asset: assets/fonts/BentonSans-Regular.otf
+    - family: BentonSans-Book
+      fonts:
+        - asset: assets/fonts/BentonSans-Book.otf
+    - family: BentonSans-Medium
+      fonts:
+        - asset: assets/fonts/BentonSans-Medium.otf
+    - family: BentonSans-Bold
+      fonts:
+        - asset: assets/fonts/BentonSans-Bold.otf
+    - family: BentonSans-Black
+      fonts:
+        - asset: assets/fonts/BentonSans-Black.otf
 
 flavorizr:
   flavors:
@@ -31,17 +54,17 @@ flavorizr:
         name: "Hallopak"
       android:
         applicationId: "com.lightsoft.hallopak"
-        icon: "assets/images/logo/icon_simpel.png"
+        icon: "assets/images/logo/logo_hallopak.png"
       ios:
         bundleId: "com.lightsoft.hallopak"
-        icon: "assets/images/logo/icon_simpel.png"
+        icon: "assets/images/logo/logo_hallopak.png"
 
     development:
       app:
         name: "[dev] Hallopak"
       android:
         applicationId: "com.lightsoft.hallopak.dev"
-        icon: "assets/images/logo/icon_simpel_dev.png"
+        icon: "assets/images/logo/logo_hallopak.png"
       ios:
         bundleId: "com.lightsoft.hallopak.dev"
-        icon: "assets/images/logo/icon_simpel_dev.png"
+        icon: "assets/images/logo/logo_hallopak.png"

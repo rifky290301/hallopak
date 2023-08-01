@@ -1,0 +1,8 @@
+{
+  "grup_time": "string",
+  "is_read": false,
+  "penerima": "email@gmail.com",
+  "pengirim": "email@gmail.com",
+  "pesan": "pesan",
+  "time": "2020-12-12 12:12:12"
+}
