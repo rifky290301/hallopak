@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:hallopak/app/themes/constants/app_size.dart';
+import 'package:hallopak/app/data/models/user_model.dart';
+import 'package:hallopak/app/modules/complaint/views/detail_complaint_view.dart';
+import 'package:hallopak/app/routes/app_pages.dart';
 import 'package:hallopak/app/themes/extensions/app_text_style.dart';
-import 'package:hallopak/app/themes/widgets/app_button.dart';
+import 'package:hallopak/app/themes/helpers/convert_time.dart';
 import 'package:hallopak/app/themes/widgets/app_decoration.dart';
-import 'package:hallopak/app/themes/widgets/app_dropdown_form_field.dart';
 import 'package:hallopak/app/themes/widgets/app_header.dart';
-import 'package:hallopak/app/themes/widgets/app_text_form_field.dart';
-import 'package:hallopak/app/utils/form_validator.dart';
+import 'package:hallopak/app/themes/widgets/app_list_tile.dart';
 
+import '../../../themes/constants/app_size.dart';
 import '../controllers/complaint_controller.dart';
 
 class ComplaintView extends GetView<ComplaintController> {
@@ -24,57 +25,59 @@ class ComplaintView extends GetView<ComplaintController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppHeader.appBack,
-              AppHeader.appText('Komplain'),
-              Form(
-                key: controller.globarKey,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSize.medium),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Judul', style: AppTextStyle.textMedium),
-                      AppTextFormField(
-                        controller: controller.judulTEC!,
-                        hintText: 'Judul',
-                        validator: FormValidator.commonString,
-                        paddingBottom: AppSize.small,
-                        paddingTop: AppSize.micro / 2,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AppHeader.appText('Komplain List', paddingbottom: 0),
+                  if (controller.role == WARGA)
+                    Container(
+                      height: 45,
+                      width: 45,
+                      margin: const EdgeInsets.only(right: AppSize.medium),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(AppSize.small),
+                        color: const Color(0xFFFDF5ED),
                       ),
-                      Text('Deskripsi', style: AppTextStyle.textMedium),
-                      AppTextFormField(
-                        controller: controller.deskripsiTEC!,
-                        hintText: 'Deskripsi',
-                        validator: FormValidator.commonString,
-                        paddingBottom: AppSize.small,
-                        paddingTop: AppSize.micro / 2,
-                      ),
-                      Text('Satpam', style: AppTextStyle.textMedium),
-                      const SizedBox(height: AppSize.micro / 2),
-                      AppDropdownFormField(
-                        validator: FormValidator.commonString,
-                        listItem: const ['rifky@gmail.com', 'martha@gmail.com', 'hadian@gmail.com'],
-                        selectedValue: controller.selectedEmail,
-                        onChanged: (String? newValue) {
-                          controller.selectedEmail = newValue!;
-                        },
-                        hintText: 'Pilih Satpam',
-                      ),
-                      const SizedBox(height: AppSize.largest),
-                      SizedBox(
-                        width: Get.width,
-                        child: Center(
-                          child: AppButton(
-                            text: 'Laporkan',
-                            onPressed: () {
-                              if (controller.globarKey.currentState!.validate()) {
-                                // controller.register();
-                              }
-                            },
-                          ),
+                      child: IconButton(
+                        onPressed: () => Get.toNamed(Routes.ADD_COMPLAINT),
+                        icon: const Icon(
+                          Icons.add_rounded,
+                          color: Color(0xFFDA6317),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                ],
+              ),
+              Expanded(
+                child: GetBuilder<ComplaintController>(
+                  init: controller,
+                  builder: (_) {
+                    if (_.complaints.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'Tidak ada pengaduan',
+                          style: AppTextStyle.textMedium.copyWith(fontSize: 16),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      padding: const EdgeInsets.only(top: AppSize.small, left: AppSize.small, right: AppSize.small),
+                      itemCount: _.complaints.length,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () => Get.to(const DetailComplaintView(), arguments: _.complaints[index]),
+                          child: AppListTile(
+                            icon: Icons.report_gmailerrorred_rounded,
+                            title: _.complaints[index].judul!,
+                            subtitle: _.complaints[index].deskripsi!,
+                            time: ConvertTime.convertDate(_.complaints[index].waktu!),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
               const Center(child: Text('')),

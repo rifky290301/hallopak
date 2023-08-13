@@ -2,8 +2,10 @@
   "warga": "warga",
   "satpam": "satpam",
   "alamat_penempatan": "alamat_penempatan",
-  "tanggal_kontrak": "tanggal_kontrak",
+  "tanggal_kontrak_mulai": "tanggal_kontrak",
+  "tanggal_kontrak_selesai": "tanggal_kontrak",
   "jam_kerja": "jam_kerja",
-  "setuju": "setuju",
-  "alasan": "alasan"
+  "gaji": "gaji",
+  "alasan": "alasan",
+  "is_acc": false
 }

@@ -17,4 +17,5 @@ class AppColors {
   static Color borderTextfield = const Color(0xFFC4C4C4);
   static Color textDisable = const Color(0xFFC4C4C4);
   static Color textEnable = const Color(0xFF09051C);
+  static Color success = const Color(0xFF53E88B);
 }

@@ -32,4 +32,14 @@ class UserProvider {
       return UserModel();
     }
   }
+
+  Future<List<UserModel>> getUsers({String? role}) async {
+    try {
+      var result = await _firestore.collection(FirestoreVar.users).where('role', isEqualTo: role).get();
+      return result.docs.map((e) => UserModel.fromJson(e.data())).toList();
+    } catch (e) {
+      errorSnackbar(e.toString());
+      return [];
+    }
+  }
 }

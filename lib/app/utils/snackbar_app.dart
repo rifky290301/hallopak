@@ -10,3 +10,22 @@ Future errorSnackbar(String message) async {
     colorText: Colors.white,
   );
 }
+
+Future successSnackbar(String message) async {
+  return Get.snackbar(
+    "Success",
+    message,
+    backgroundColor: AppColors.success,
+    colorText: Colors.white,
+    duration: const Duration(seconds: 5),
+  );
+}
+
+Future infoSnackbar(String message) async {
+  return Get.snackbar(
+    "Info",
+    message,
+    backgroundColor: Colors.blue,
+    colorText: Colors.white,
+  );
+}

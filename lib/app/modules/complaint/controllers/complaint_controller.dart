@@ -1,22 +1,38 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hallopak/app/data/providers/auth_provider.dart';
+import 'package:hallopak/app/data/models/complaint_model.dart';
+import 'package:hallopak/app/data/models/user_model.dart';
+import 'package:hallopak/app/data/providers/complaint_provider.dart';
 import 'package:hallopak/app/data/providers/local_storage.dart';
 
 class ComplaintController extends GetxController {
-  final authProvider = Get.find<AuthProvider>();
-  final globarKey = GlobalKey<FormState>();
-  final _local = Get.find<LocalStorage>();
-  TextEditingController? judulTEC;
-  TextEditingController? deskripsiTEC;
-  String? selectedEmail;
-  Timestamp? tanggal;
+  final _local = Get.find<LocalStorage>().user;
+  final complaintProvider = ComplaintProvider();
+  List<ComplaintModel> complaints = [];
+  String get role => _local.role!;
+
+  Future<void> getComplaints() async {
+    String? emailSatpam;
+    String? emailWarga;
+    if (_local.role == WARGA) {
+      emailSatpam = null;
+      emailWarga = _local.email;
+    } else {
+      emailSatpam = _local.email;
+      emailWarga = null;
+    }
+
+    complaints = await complaintProvider.getComplaints(emailSatpam: emailSatpam, emailWarga: emailWarga);
+    update();
+  }
+
+  void addComplaint(ComplaintModel model) async {
+    complaints.add(model);
+    update();
+  }
 
   @override
   void onInit() {
-    judulTEC = TextEditingController();
-    deskripsiTEC = TextEditingController();
+    getComplaints();
     super.onInit();
   }
 }

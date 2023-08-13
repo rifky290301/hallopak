@@ -13,7 +13,6 @@ import 'package:hallopak/app/themes/widgets/app_date_field.dart';
 import 'package:hallopak/app/themes/widgets/app_dropdown_form_field.dart';
 import 'package:hallopak/app/themes/widgets/app_text_form_field.dart';
 import 'package:hallopak/app/utils/form_validator.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../controllers/form_profile_controller.dart';
 
@@ -118,17 +117,62 @@ class FormProfileView extends GetView<FormProfileController> {
                     AppDateField(
                       controller: controller.tanggalLahirTEC!,
                       hintText: 'Tanggal Lahir',
-                      paddingBottom: AppSize.small,
+                      // paddingBottom: AppSize.small,
                       paddingTop: AppSize.micro / 2,
                       onSelectedDate: (DateTime? date) {
                         controller.tanggalLahirTEC!.text = '${date!.day} - ${date.month} - ${date.year}';
                         controller.tanggalLahir = Timestamp.fromDate(date);
                       },
                     ),
+                    const SizedBox(height: AppSize.small),
+                    Text('Foto Profil', style: AppTextStyle.textMedium),
+                    InkWell(
+                      onTap: () => controller.pickImageSource(FilePick.profile),
+                      child: GetBuilder<FormProfileController>(
+                        id: 'image',
+                        init: controller,
+                        builder: (_) {
+                          return Container(
+                            height: Get.width,
+                            width: Get.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(AppSize.semiSmall),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.primary.withOpacity(0.25),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 10),
+                                ),
+                              ],
+                            ),
+                            child: _.profileFile == null
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.photo_camera_outlined,
+                                        color: AppColors.textDisable,
+                                        size: AppSize.semiLarge,
+                                      ),
+                                      const SizedBox(height: AppSize.micro / 2),
+                                      Text(
+                                        'Ambil Foto',
+                                        style: AppTextStyle.textBold,
+                                      ),
+                                    ],
+                                  )
+                                : Image.file(_.profileFile!),
+                          );
+                        },
+                      ),
+                    ),
                     if (controller.local.user.role == SATPAM) ...[
+                      const SizedBox(height: AppSize.small),
                       Text('Sertifikat', style: AppTextStyle.textMedium),
                       InkWell(
-                        onTap: () => controller.pickImageSource(ImageSource.gallery),
+                        onTap: () => controller.pickImageSource(FilePick.sertifikat),
                         child: GetBuilder<FormProfileController>(
                           id: 'image',
                           init: controller,
@@ -147,7 +191,7 @@ class FormProfileView extends GetView<FormProfileController> {
                                   ),
                                 ],
                               ),
-                              child: _.sertifikat == null
+                              child: _.sertifikatFile == null
                                   ? Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -164,7 +208,7 @@ class FormProfileView extends GetView<FormProfileController> {
                                         ),
                                       ],
                                     )
-                                  : Image.file(_.sertifikat!),
+                                  : Image.file(_.sertifikatFile!),
                             );
                           },
                         ),

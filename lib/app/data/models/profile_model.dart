@@ -4,6 +4,7 @@ const String MENIKAH = "Menikah";
 const String BELUM_MENIKAH = "Belum Menikah";
 
 class ProfileModel {
+  final String? id;
   final String? nama;
   final String? tempatLahir;
   final Timestamp? tanggalLahir;
@@ -13,8 +14,10 @@ class ProfileModel {
   final String? pendidikanTerakhir;
   final String? status;
   final String? sertifikat;
+  final String? profile;
 
   ProfileModel({
+    this.id,
     this.nama,
     this.tempatLahir,
     this.tanggalLahir,
@@ -24,9 +27,11 @@ class ProfileModel {
     this.pendidikanTerakhir,
     this.status,
     this.sertifikat,
+    this.profile,
   });
 
   ProfileModel copyWith({
+    String? id,
     String? nama,
     String? tempatLahir,
     Timestamp? tanggalLahir,
@@ -36,8 +41,10 @@ class ProfileModel {
     String? pendidikanTerakhir,
     String? status,
     String? sertifikat,
+    String? profile,
   }) =>
       ProfileModel(
+        id: id ?? this.id,
         nama: nama ?? this.nama,
         tempatLahir: tempatLahir ?? this.tempatLahir,
         tanggalLahir: tanggalLahir ?? this.tanggalLahir,
@@ -47,6 +54,7 @@ class ProfileModel {
         pendidikanTerakhir: pendidikanTerakhir ?? this.pendidikanTerakhir,
         status: status ?? this.status,
         sertifikat: sertifikat ?? this.sertifikat,
+        profile: profile ?? this.profile,
       );
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -59,6 +67,7 @@ class ProfileModel {
         pendidikanTerakhir: json["pendidikan_terakhir"],
         status: json["status"],
         sertifikat: json["sertifikat"],
+        profile: json["profile"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -71,5 +80,23 @@ class ProfileModel {
         "pendidikan_terakhir": pendidikanTerakhir,
         "status": status,
         "sertifikat": sertifikat,
+        "profile": profile,
       };
+
+  factory ProfileModel.fromFirestore(DocumentSnapshot doc) {
+    Map data = doc.data() as Map;
+    return ProfileModel(
+      id: doc.id,
+      nama: data['nama'],
+      tempatLahir: data['tempat_lahir'],
+      tanggalLahir: data['tanggal_lahir'],
+      nik: data['nik'],
+      noHp: data['no_hp'],
+      alamat: data['alamat'],
+      pendidikanTerakhir: data['pendidikan_terakhir'],
+      status: data['status'],
+      sertifikat: data['sertifikat'],
+      profile: data['profile'],
+    );
+  }
 }

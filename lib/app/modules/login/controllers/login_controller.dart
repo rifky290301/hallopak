@@ -25,7 +25,7 @@ class LoginController extends GetxController {
         'Login Success',
         snackPosition: SnackPosition.BOTTOM,
       );
-      _local.storeUser(user);
+      _local.storeUser = user;
       Get.offAllNamed(Routes.HOME);
       // Get.offAllNamed(Routes.FORM_PROFILE);
     } catch (e) {

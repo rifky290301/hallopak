@@ -4,13 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hallopak/app/data/core/static/storage_var.dart';
 import 'package:hallopak/app/data/models/profile_model.dart';
 import 'package:hallopak/app/data/providers/local_storage.dart';
 import 'package:hallopak/app/data/providers/profile_provider.dart';
 import 'package:hallopak/app/data/providers/upload_file_provider.dart';
 import 'package:hallopak/app/routes/app_pages.dart';
+import 'package:hallopak/app/themes/dialog/app_buttom_sheet.dart';
 import 'package:hallopak/app/themes/dialog/app_loading_dialog.dart';
 import 'package:image_picker/image_picker.dart';
+
+enum FilePick { sertifikat, profile }
 
 class FormProfileController extends GetxController {
   final _imagePicker = ImagePicker();
@@ -24,17 +28,27 @@ class FormProfileController extends GetxController {
   TextEditingController? tempatLahirTEC;
   TextEditingController? tanggalLahirTEC;
   Timestamp? tanggalLahir;
-  File? sertifikat;
+  File? sertifikatFile;
+  File? profileFile;
   String? status;
   String? selectedRole;
 
   LocalStorage get local => _local;
 
-  Future<void> pickImageSource(ImageSource pick) async {
+  Future<void> pickImageSource(FilePick filePick) async {
     try {
+      ImageSource pick = await AppBottomSheet.buildBottomSheet(Get.context!);
       final image = await _imagePicker.pickImage(source: pick);
       if (image == null) return;
-      sertifikat = File(image.path);
+      switch (filePick) {
+        case FilePick.sertifikat:
+          sertifikatFile = File(image.path);
+          break;
+        case FilePick.profile:
+          profileFile = File(image.path);
+          break;
+        default:
+      }
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -44,7 +58,12 @@ class FormProfileController extends GetxController {
   Future<void> createProfile() async {
     AppLoadingDialog.show(Get.context!);
     String? urlSertifikat;
-    if (sertifikat != null) urlSertifikat = await UploadFileProvide().uploadFile(sertifikat!);
+    String? urlProfile;
+    if (sertifikatFile != null) {
+      urlSertifikat = await UploadFileProvide().uploadFile(sertifikatFile!, StorageVar.sertifikat);
+    }
+    if (profileFile != null) urlProfile = await UploadFileProvide().uploadFile(profileFile!, StorageVar.profile);
+
     final profile = ProfileModel(
       nama: namaTEC!.text,
       nik: nikTEC!.text,
@@ -55,11 +74,12 @@ class FormProfileController extends GetxController {
       tempatLahir: tempatLahirTEC!.text,
       tanggalLahir: tanggalLahir,
       sertifikat: urlSertifikat,
+      profile: urlProfile,
     );
     await ProfileProvider().updateProfile(profile, _local.user.email!);
     Get.snackbar(
       'Success',
-      'Profile Created',
+      'Profil berhasil dibuat',
       snackPosition: SnackPosition.BOTTOM,
     );
     Get.offNamed(Routes.HOME);

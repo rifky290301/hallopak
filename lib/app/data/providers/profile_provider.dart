@@ -14,7 +14,7 @@ class ProfileProvider {
   Future<ProfileModel> getProfile(String email) async {
     try {
       var result = await _firestore.collection(FirestoreVar.profile).doc(email).get().then((value) => value);
-      return ProfileModel.fromJson(result.data() ?? {});
+      return ProfileModel.fromFirestore(result);
     } catch (e) {
       errorSnackbar(e.toString());
       return ProfileModel();

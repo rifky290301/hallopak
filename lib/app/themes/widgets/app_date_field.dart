@@ -8,13 +8,9 @@ import '../extensions/app_text_style.dart';
 class AppDateField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  // final TextInputAction? textInputAction;
   final double? paddingTop;
   final double? paddingBottom;
   final Widget? suffix;
-  // final bool obscureText;
-  // final String? Function(String?)? validator;
-  // final bool? enabled;
   final bool? isRequired;
   final TextInputType? keyboardType;
 

@@ -22,25 +22,6 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   decoration: BoxDecoration(gradient: AppGradients.primary),
-    //   child: ElevatedButton(
-    //     style: ButtonStyle(
-    //       backgroundColor: MaterialStateProperty.all(Colors.transparent),
-    //       textStyle: MaterialStateProperty.all(TextStyle(color: textColor ?? Colors.white)),
-    //       padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: AppSize.small)),
-    //       shape: MaterialStateProperty.all(
-    //         RoundedRectangleBorder(
-    //           borderRadius: BorderRadius.circular(radius),
-    //         ),
-    //       ),
-    //     ),
-    //     child: Text(text, style: AppTextStyle.textBold.copyWith(color: textColor ?? Colors.white)),
-    //     onPressed: () {
-    //       onPressed.call();
-    //     },
-    //   ),
-    // );
     return Container(
       height: 44.0,
       width: width ?? 156,
