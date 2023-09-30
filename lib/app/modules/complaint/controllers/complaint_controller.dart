@@ -9,8 +9,10 @@ class ComplaintController extends GetxController {
   final complaintProvider = ComplaintProvider();
   List<ComplaintModel> complaints = [];
   String get role => _local.role!;
+  bool isLoad = true;
 
   Future<void> getComplaints() async {
+    isLoad = true;
     String? emailSatpam;
     String? emailWarga;
     if (_local.role == WARGA) {
@@ -21,7 +23,11 @@ class ComplaintController extends GetxController {
       emailWarga = null;
     }
 
-    complaints = await complaintProvider.getComplaints(emailSatpam: emailSatpam, emailWarga: emailWarga);
+    complaints = await complaintProvider.getComplaints(
+      emailSatpam: emailSatpam,
+      emailWarga: emailWarga,
+    );
+    isLoad = false;
     update();
   }
 

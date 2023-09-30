@@ -23,21 +23,24 @@ class RegisterView extends GetView<RegisterController> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/image/bg_login2.png'),
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-            ),
-          ),
+          // decoration: const BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage('assets/images/image/bg_login2.png'),
+          //     fit: BoxFit.fitWidth,
+          //     alignment: Alignment.topCenter,
+          //   ),
+          // ),
           child: Column(
             children: [
               SizedBox(
                 height: Get.height * 0.1,
               ),
-              Image.asset(
-                'assets/images/logo/logo_hallopak.png',
-                width: 200,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image.asset(
+                  'assets/images/logo/logo_hallopak.png',
+                  width: 200,
+                ),
               ),
               Form(
                 key: registerKey,
@@ -99,7 +102,6 @@ class RegisterView extends GetView<RegisterController> {
                 child: Text(
                   'Sudah punya akun? Login',
                   style: AppTextStyle.textMedium.copyWith(
-                    color: AppColors.primary,
                     decoration: TextDecoration.underline,
                   ),
                 ),

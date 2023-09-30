@@ -7,7 +7,7 @@ import '../extensions/app_text_style.dart';
 import '../widgets/app_button.dart';
 import '../widgets/app_outline_button.dart';
 
-Future<ImageSource> buildBottomSheetCustom(BuildContext context) async {
+Future<ImageSource?> buildBottomSheetCustom(BuildContext context) async {
   return await showModalBottomSheet(
     context: context,
     shape: const RoundedRectangleBorder(

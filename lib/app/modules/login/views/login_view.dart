@@ -20,21 +20,24 @@ class LoginView extends GetView<LoginController> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/image/bg_login2.png'),
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-            ),
-          ),
+          // decoration: const BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage('assets/images/image/bg_login2.png'),
+          //     fit: BoxFit.fitWidth,
+          //     alignment: Alignment.topCenter,
+          //   ),
+          // ),
           child: Column(
             children: [
               SizedBox(
                 height: Get.height * 0.1,
               ),
-              Image.asset(
-                'assets/images/logo/logo_hallopak.png',
-                width: 200,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image.asset(
+                  'assets/images/logo/logo_hallopak.png',
+                  width: 200,
+                ),
               ),
               Form(
                 key: loginKey,
@@ -85,7 +88,7 @@ class LoginView extends GetView<LoginController> {
               TextButton(
                 child: Text(
                   'Belum punya akun? Daftar disini',
-                  style: AppTextStyle.textMedium.copyWith(color: AppColors.primary),
+                  style: AppTextStyle.textMedium.copyWith(decoration: TextDecoration.underline),
                 ),
                 onPressed: () {
                   Get.toNamed(Routes.REGISTER);

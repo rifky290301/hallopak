@@ -15,6 +15,7 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const CONVERTATION = _Paths.CHAT + _Paths.CONVERTATION;
   static const ADD_COMPLAINT = _Paths.COMPLAINT + _Paths.ADD_COMPLAINT;
+  static const EDIT_PROFILE = _Paths.FORM_PROFILE + _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const CONVERTATION = '/convertation';
   static const ADD_COMPLAINT = '/add-complaint';
+  static const EDIT_PROFILE = '/edit-profile';
 }

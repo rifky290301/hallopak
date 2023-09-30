@@ -24,9 +24,9 @@ class AppOutlineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(color ?? AppColors.secondary),
+        backgroundColor: MaterialStateProperty.all(color ?? Colors.white),
         textStyle: MaterialStateProperty.all(TextStyle(color: textColor ?? AppColors.primary)),
-        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: AppSize.semiSmall)),
+        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: AppSize.semiSmall - 2)),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.semiSmall),
@@ -34,7 +34,10 @@ class AppOutlineButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Text(text, style: AppTextStyle.textMedium.copyWith(color: textColor ?? AppColors.primary)),
+      child: Text(
+        text,
+        style: AppTextStyle.textMedium.copyWith(color: textColor ?? AppColors.primary, fontSize: 16),
+      ),
       onPressed: () {
         onPressed.call();
       },

@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hallopak/app/data/models/agreement_form_model.dart';
-import 'package:hallopak/app/data/models/chat_model.dart';
 import 'package:hallopak/app/data/providers/agreement_form_provider.dart';
 import 'package:hallopak/app/modules/chat/conversation/controllers/conversation_controller.dart';
 import 'package:hallopak/app/themes/dialog/app_loading_dialog.dart';
@@ -18,6 +17,8 @@ class AgreementFormController extends GetxController {
   TextEditingController? satpamTEC;
   TextEditingController? alamatTEC;
   TextEditingController? jamKerjaTEC;
+  TextEditingController? jamKerjaMulaiTEC;
+  TextEditingController? jamKerjaBerakhirTEC;
   TextEditingController? alasanTEC;
   TextEditingController? gajiTEC;
   TextEditingController? tanggalKontrakMulaiTEC;
@@ -25,13 +26,13 @@ class AgreementFormController extends GetxController {
   Timestamp? tanggalKontrakMulai;
   Timestamp? tanggalKontrakSelesai;
   AgreementFormModel? agreementFormModel;
-  ChatModel? chatModel;
+  // ChatModel? chatModel;
   bool? isAcc;
 
   Future<void> addForm() async {
     AppConfirmationDialog.show(
       Get.context!,
-      message: 'Apakah untuk melakukan kesepakatan?',
+      message: 'Apakah anda yakin untuk melakukan kesepakatan?',
       textAgree: 'Ya',
     ).then((value) async {
       if (!value) return;
@@ -43,13 +44,16 @@ class AgreementFormController extends GetxController {
           alamatPenempatan: alamatTEC!.text,
           tanggalKontrakMulai: tanggalKontrakMulai,
           tanggalKontrakSelesai: tanggalKontrakSelesai,
-          jamKerja: jamKerjaTEC!.text,
+          // jamKerja: jamKerjaTEC!.text,
+          jamKerjaMulai: jamKerjaMulaiTEC?.text,
+          jamKerjaBerakhir: jamKerjaBerakhirTEC?.text,
           gaji: gajiTEC!.text,
           isAcc: false,
           alasan: null,
         );
 
         await _agreementFormProvider.addAgreementForm(_chatting.chatModel!.id!, data).then((value) {
+          Get.back();
           Get.back();
           Get.back();
           successSnackbar("Berhasil mengirimkan form");
@@ -63,18 +67,14 @@ class AgreementFormController extends GetxController {
     });
   }
 
-  Future<void> updateForm() async {
-    final data = agreementFormModel!.copyWith(isAcc: isAcc, alasan: alasanTEC!.text);
-    await _agreementFormProvider.updateAgreementForm(_chatting.chatModel!.id!, agreementFormModel!.id!, data);
-  }
-
   @override
   void onInit() {
     wargaTEC = TextEditingController();
     satpamTEC = TextEditingController();
     alamatTEC = TextEditingController();
-    jamKerjaTEC = TextEditingController();
-    alasanTEC = TextEditingController();
+    jamKerjaBerakhirTEC = TextEditingController();
+    jamKerjaMulaiTEC = TextEditingController();
+    // alasanTEC = TextEditingController();
     gajiTEC = TextEditingController();
     tanggalKontrakMulaiTEC = TextEditingController();
     tanggalKontrakSelesaiTEC = TextEditingController();

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hallopak/app/data/core/static/firestore_var.dart';
 
 import '../../utils/snackbar_app.dart';
@@ -16,7 +17,8 @@ class ProfileProvider {
       var result = await _firestore.collection(FirestoreVar.profile).doc(email).get().then((value) => value);
       return ProfileModel.fromFirestore(result);
     } catch (e) {
-      errorSnackbar(e.toString());
+      errorSnackbar('Terjadi kesalahan');
+      debugPrint(e.toString());
       return ProfileModel();
     }
   }
@@ -25,6 +27,7 @@ class ProfileProvider {
     try {
       await _firestore.collection(FirestoreVar.profile).doc(email).set(profile.toJson());
     } catch (e) {
+      debugPrint(e.toString());
       errorSnackbar(e.toString());
     }
   }

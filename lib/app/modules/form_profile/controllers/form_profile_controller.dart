@@ -6,11 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hallopak/app/data/core/static/storage_var.dart';
 import 'package:hallopak/app/data/models/profile_model.dart';
+import 'package:hallopak/app/data/models/user_model.dart';
 import 'package:hallopak/app/data/providers/local_storage.dart';
 import 'package:hallopak/app/data/providers/profile_provider.dart';
 import 'package:hallopak/app/data/providers/upload_file_provider.dart';
 import 'package:hallopak/app/routes/app_pages.dart';
-import 'package:hallopak/app/themes/dialog/app_buttom_sheet.dart';
+import 'package:hallopak/app/themes/dialog/app_bottom_sheet.dart';
 import 'package:hallopak/app/themes/dialog/app_loading_dialog.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -37,8 +38,10 @@ class FormProfileController extends GetxController {
 
   Future<void> pickImageSource(FilePick filePick) async {
     try {
-      ImageSource pick = await AppBottomSheet.buildBottomSheet(Get.context!);
-      final image = await _imagePicker.pickImage(source: pick);
+      // ImageSource pick = await AppBottomSheet.buildBottomSheet(Get.context!);
+      ImageSource? source = await buildBottomSheetCustom(Get.context!);
+      if (source == null) return;
+      final image = await _imagePicker.pickImage(source: source);
       if (image == null) return;
       switch (filePick) {
         case FilePick.sertifikat:
@@ -56,6 +59,17 @@ class FormProfileController extends GetxController {
   }
 
   Future<void> createProfile() async {
+    if (local.user.role == SATPAM) {
+      if (sertifikatFile == null || profileFile == null) {
+        update(['required']);
+        return;
+      }
+    } else {
+      if (profileFile == null) {
+        update(['required']);
+        return;
+      }
+    }
     AppLoadingDialog.show(Get.context!);
     String? urlSertifikat;
     String? urlProfile;
@@ -82,7 +96,7 @@ class FormProfileController extends GetxController {
       'Profil berhasil dibuat',
       snackPosition: SnackPosition.BOTTOM,
     );
-    Get.offNamed(Routes.HOME);
+    Get.offAllNamed(Routes.HOME);
   }
 
   @override

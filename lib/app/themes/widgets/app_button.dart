@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hallopak/app/themes/constants/app_gradients.dart';
+import 'package:hallopak/app/themes/constants/app_colors.dart';
 
 import '../constants/app_size.dart';
 import '../extensions/app_text_style.dart';
@@ -26,7 +26,8 @@ class AppButton extends StatelessWidget {
       height: 44.0,
       width: width ?? 156,
       decoration: BoxDecoration(
-        gradient: AppGradients.primary,
+        // gradient: AppGradients.primary,
+        color: AppColors.coba2,
         borderRadius: BorderRadius.circular(AppSize.semiSmall),
       ),
       child: ElevatedButton(

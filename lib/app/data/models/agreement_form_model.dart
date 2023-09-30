@@ -8,6 +8,8 @@ class AgreementFormModel {
   final Timestamp? tanggalKontrakMulai;
   final Timestamp? tanggalKontrakSelesai;
   final String? jamKerja;
+  final String? jamKerjaMulai;
+  final String? jamKerjaBerakhir;
   final String? gaji;
   final String? alasan;
   final bool? isAcc;
@@ -20,6 +22,8 @@ class AgreementFormModel {
     this.tanggalKontrakMulai,
     this.tanggalKontrakSelesai,
     this.jamKerja,
+    this.jamKerjaMulai,
+    this.jamKerjaBerakhir,
     this.gaji,
     this.alasan,
     this.isAcc,
@@ -33,6 +37,8 @@ class AgreementFormModel {
     Timestamp? tanggalKontrakMulai,
     Timestamp? tanggalKontrakSelesai,
     String? jamKerja,
+    String? jamKerjaMulai,
+    String? jamKerjaBerakhir,
     String? gaji,
     String? alasan,
     bool? isAcc,
@@ -45,6 +51,8 @@ class AgreementFormModel {
         tanggalKontrakMulai: tanggalKontrakMulai ?? this.tanggalKontrakMulai,
         tanggalKontrakSelesai: tanggalKontrakSelesai ?? this.tanggalKontrakSelesai,
         jamKerja: jamKerja ?? this.jamKerja,
+        jamKerjaMulai: jamKerjaMulai ?? this.jamKerjaMulai,
+        jamKerjaBerakhir: jamKerjaBerakhir ?? this.jamKerjaBerakhir,
         gaji: gaji ?? this.gaji,
         alasan: alasan ?? this.alasan,
         isAcc: isAcc ?? this.isAcc,
@@ -57,6 +65,8 @@ class AgreementFormModel {
         tanggalKontrakMulai: json["tanggal_kontrak_mulai"],
         tanggalKontrakSelesai: json["tanggal_kontrak_selesai"],
         jamKerja: json["jam_kerja"],
+        jamKerjaMulai: json["jam_kerja_mulai"],
+        jamKerjaBerakhir: json["jam_kerja_berakhir"],
         gaji: json["gaji"],
         alasan: json["alasan"],
         isAcc: json["is_acc"],
@@ -69,6 +79,8 @@ class AgreementFormModel {
         "tanggal_kontrak_mulai": tanggalKontrakMulai,
         "tanggal_kontrak_selesai": tanggalKontrakSelesai,
         "jam_kerja": jamKerja,
+        "jam_kerja_mulai": jamKerjaMulai,
+        "jam_kerja_berakhir": jamKerjaBerakhir,
         "gaji": gaji,
         "alasan": alasan,
         "is_acc": isAcc,
@@ -84,6 +96,8 @@ class AgreementFormModel {
       tanggalKontrakMulai: json["tanggal_kontrak_mulai"],
       tanggalKontrakSelesai: json["tanggal_kontrak_selesai"],
       jamKerja: json["jam_kerja"],
+      jamKerjaMulai: json["jam_kerja_mulai"],
+      jamKerjaBerakhir: json["jam_kerja_berakhir"],
       gaji: json["gaji"],
       alasan: json["alasan"],
       isAcc: json["is_acc"],

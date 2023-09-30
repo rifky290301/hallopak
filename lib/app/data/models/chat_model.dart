@@ -7,6 +7,8 @@ class ChatModel {
   final String? lastMessage;
   final Timestamp? lastMessageTime;
   final bool? isAcc;
+  final int? bintang;
+  final String? ulasan;
 
   ChatModel({
     this.id,
@@ -15,6 +17,8 @@ class ChatModel {
     this.lastMessage,
     this.lastMessageTime,
     this.isAcc,
+    this.bintang,
+    this.ulasan,
   });
 
   ChatModel copyWith({
@@ -24,6 +28,8 @@ class ChatModel {
     String? lastMessage,
     Timestamp? lastMessageTime,
     bool? isAcc,
+    int? bintang,
+    String? ulasan,
   }) =>
       ChatModel(
         id: id ?? this.id,
@@ -32,6 +38,8 @@ class ChatModel {
         lastMessage: lastMessage ?? this.lastMessage,
         lastMessageTime: lastMessageTime ?? this.lastMessageTime,
         isAcc: isAcc ?? this.isAcc,
+        bintang: bintang ?? this.bintang,
+        ulasan: ulasan ?? this.ulasan,
       );
 
   factory ChatModel.fromJson(Map<String, dynamic> json) => ChatModel(
@@ -41,6 +49,8 @@ class ChatModel {
         lastMessage: json["last_message"],
         lastMessageTime: json["last_message_time"],
         isAcc: json["is_acc"],
+        bintang: json["bintang"],
+        ulasan: json["ulasan"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +59,8 @@ class ChatModel {
         "last_message": lastMessage,
         "last_message_time": lastMessageTime,
         "is_acc": isAcc,
+        "bintang": bintang,
+        "ulasan": ulasan,
       };
 
   factory ChatModel.fromFirestore(DocumentSnapshot doc) {
@@ -60,6 +72,8 @@ class ChatModel {
       lastMessage: data['last_message'],
       lastMessageTime: data['last_message_time'],
       isAcc: data['is_acc'],
+      bintang: data['bintang'],
+      ulasan: data['ulasan'],
     );
   }
 }

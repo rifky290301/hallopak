@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hallopak/app/data/core/static/firestore_var.dart';
 import 'package:hallopak/app/utils/snackbar_app.dart';
 
@@ -23,7 +24,20 @@ class ChatProvider {
             (value) => value.docs.map((e) => ChatModel.fromFirestore(e)).toList(),
           );
     } catch (e) {
-      errorSnackbar(e.toString());
+      errorSnackbar('terjadi kesalahan');
+      debugPrint(e.toString());
+      return Future.value([]);
+    }
+  }
+
+  Future<List<ChatModel>> getAllChats() async {
+    try {
+      return _firestore.collection(FirestoreVar.chat).get().then(
+            (value) => value.docs.map((e) => ChatModel.fromFirestore(e)).toList(),
+          );
+    } catch (e) {
+      errorSnackbar('terjadi kesalahan');
+      debugPrint(e.toString());
       return Future.value([]);
     }
   }

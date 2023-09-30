@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:hallopak/app/routes/app_pages.dart';
 import 'package:hallopak/app/themes/constants/app_colors.dart';
 import 'package:hallopak/app/themes/constants/app_gradients.dart';
 import 'package:hallopak/app/themes/constants/app_size.dart';
@@ -67,8 +68,8 @@ class ProfileView extends GetView<ProfileController> {
                             icon: const Icon(Icons.camera_alt_rounded, color: Colors.white, size: 20),
                             // onPressed: () => controller.pickImageSource(ImageSource.camera),
                             onPressed: () async {
-                              ImageSource source = await buildBottomSheetCustom(context);
-                              controller.pickImageSource(source);
+                              ImageSource? source = await buildBottomSheetCustom(context);
+                              if (source != null) controller.pickImageSource(source);
                             },
                           ),
                         ),
@@ -98,7 +99,7 @@ class ProfileView extends GetView<ProfileController> {
                 child: Column(
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Get.toNamed(Routes.EDIT_PROFILE, arguments: controller.profile),
                       child: Container(
                         height: 60,
                         padding: const EdgeInsets.symmetric(horizontal: AppSize.medium),
@@ -114,7 +115,7 @@ class ProfileView extends GetView<ProfileController> {
                               margin: const EdgeInsets.only(right: AppSize.micro),
                               padding: const EdgeInsets.all(AppSize.small),
                               decoration: BoxDecoration(
-                                color: AppColors.secondary,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(AppSize.small),
                               ),
                               child: ShaderMask(

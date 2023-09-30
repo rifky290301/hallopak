@@ -45,7 +45,7 @@ class AddComplaintController extends GetxController {
   Future<void> addComplaint() async {
     AppConfirmationDialog.show(
       Get.context!,
-      message: 'Apakah untuk melakukan kesepakatan?',
+      message: 'Apakah anda yakin untuk melaporkan ?',
       textAgree: 'Ya',
     ).then((value) async {
       if (!value) return;
@@ -61,7 +61,7 @@ class AddComplaintController extends GetxController {
         complaintController.addComplaint(model);
         clear();
         Get.back();
-        successSnackbar("Berhasil mengirimkan form");
+        successSnackbar("Berhasil mengirimkan komplain");
       });
     });
   }

@@ -18,6 +18,7 @@ class AppDateField extends StatelessWidget {
   final DateTime? firstDate;
   final DateTime? lastDate;
   final Function(DateTime)? onSelectedDate;
+  final String? Function(String?)? validator;
   const AppDateField({
     Key? key,
     required this.controller,
@@ -27,7 +28,7 @@ class AppDateField extends StatelessWidget {
     this.paddingBottom,
     this.suffix,
     // this.obscureText = false,
-    // this.validator,
+    this.validator,
     // this.enabled,
     this.isRequired,
     this.keyboardType,
@@ -49,7 +50,7 @@ class AppDateField extends StatelessWidget {
           // enabled: enabled ?? true,
           // obscureText: obscureText,
           keyboardType: keyboardType ?? TextInputType.text,
-          // validator: validator,
+          validator: validator,
           readOnly: true,
           decoration: AppInputDecoration.setDecoration(suffix, hintText).copyWith(
             suffixIcon: IconButton(

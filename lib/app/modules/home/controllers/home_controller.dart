@@ -9,9 +9,9 @@ class HomeController extends GetxController {
   final _local = Get.find<LocalStorage>();
   final _profileProvider = ProfileProvider();
   List<Icon> iconList = [
-    const Icon(CupertinoIcons.home, size: 30),
-    const Icon(CupertinoIcons.person, size: 30),
-    const Icon(CupertinoIcons.settings, size: 30),
+    const Icon(CupertinoIcons.speaker_3_fill, size: 40),
+    const Icon(CupertinoIcons.chat_bubble_2, size: 40),
+    const Icon(CupertinoIcons.search, size: 40),
   ];
   List<String> titleList = ['Pengaduan', 'Chat', 'Cari Satpam'];
   ProfileModel? profileModel;

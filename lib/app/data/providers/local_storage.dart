@@ -10,8 +10,8 @@ class LocalStorage extends GetxController {
     await GetStorage.init();
   }
 
-  set storeUser(UserModel model) {
-    box.write(LocalStorageVar.userModel, model.toJson());
+  Future<void> storeUser(UserModel model) async {
+    await box.write(LocalStorageVar.userModel, model.toJson());
   }
 
   UserModel get user => UserModel.fromJson(box.read(LocalStorageVar.userModel));

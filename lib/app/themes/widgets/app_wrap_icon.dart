@@ -24,7 +24,7 @@ class AppWrapIcon {
       child: IconButton(
         icon: ShaderMask(
           blendMode: BlendMode.srcIn,
-          shaderCallback: (Rect bounds) => AppGradients.primary.createShader(bounds),
+          shaderCallback: (Rect bounds) => AppGradients.primary3.createShader(bounds),
           child: Icon(icon),
         ),
         onPressed: () => Get.toNamed(route),

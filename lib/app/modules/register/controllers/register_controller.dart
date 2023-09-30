@@ -31,7 +31,8 @@ class RegisterController extends GetxController {
         'Register Success',
         snackPosition: SnackPosition.BOTTOM,
       );
-      _local.storeUser = user;
+      // _local.storeUser = user;
+      await _local.storeUser(user);
       Get.offAllNamed(Routes.FORM_PROFILE);
     } catch (e) {
       errorSnackbar(e.toString());

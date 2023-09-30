@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,9 +29,9 @@ class ConversationController extends GetxController {
     return tes;
   }
 
-  void gettest() {
-    _conversationProvider.getConversations(chatModel!.id!).then((value) => inspect(value));
-  }
+  // void gettest() {
+  //   _conversationProvider.getConversations(chatModel!.id!).then((value) => inspect(value));
+  // }
 
   Future<void> addConversation() async {
     // update list chat

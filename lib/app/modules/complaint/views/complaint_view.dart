@@ -9,6 +9,7 @@ import 'package:hallopak/app/themes/helpers/convert_time.dart';
 import 'package:hallopak/app/themes/widgets/app_decoration.dart';
 import 'package:hallopak/app/themes/widgets/app_header.dart';
 import 'package:hallopak/app/themes/widgets/app_list_tile.dart';
+import 'package:hallopak/app/themes/widgets/app_skeletons.dart';
 
 import '../../../themes/constants/app_size.dart';
 import '../controllers/complaint_controller.dart';
@@ -53,7 +54,17 @@ class ComplaintView extends GetView<ComplaintController> {
                 child: GetBuilder<ComplaintController>(
                   init: controller,
                   builder: (_) {
-                    if (_.complaints.isEmpty) {
+                    if (_.isLoad) {
+                      return ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: AppSize.small),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return CustomSkeleton.skeletonListTile(context);
+                        },
+                      );
+                    } else if (_.complaints.isEmpty) {
                       return Center(
                         child: Text(
                           'Tidak ada pengaduan',
@@ -67,7 +78,7 @@ class ComplaintView extends GetView<ComplaintController> {
                       physics: const BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () => Get.to(const DetailComplaintView(), arguments: _.complaints[index]),
+                          onTap: () => Get.to(() => const DetailComplaintView(), arguments: _.complaints[index]),
                           child: AppListTile(
                             icon: Icons.report_gmailerrorred_rounded,
                             title: _.complaints[index].judul!,

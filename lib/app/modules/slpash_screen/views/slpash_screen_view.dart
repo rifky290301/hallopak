@@ -13,16 +13,19 @@ class SplashScreenView extends GetView<SplashScreenController> {
       backgroundColor: AppColors.primary,
       body: Center(
         child: Container(
-          width: 120,
-          height: 120,
+          width: 160,
+          height: 160,
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Image.asset(
-            'assets/images/logo/logo_hallopak.png',
-            height: 80,
+          // decoration: BoxDecoration(
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(30),
+          // ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: Image.asset(
+              'assets/images/logo/logo_hallopak.png',
+              height: 120,
+            ),
           ),
         ),
       ),

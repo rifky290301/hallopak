@@ -11,11 +11,15 @@ class AppColors {
   // static Color darkBackground = const Color(0xFF080808);
   // static Color disabledTextfield = const Color(0xFFF3F2F1);
 
-  static Color primary = const Color(0xFF53E88B);
+  static Color primary = const Color(0xFFADAF9A);
   static Color secondary = const Color(0xFFE8F9F2);
   static Color danger = const Color(0xFFFF4B4B);
   static Color borderTextfield = const Color(0xFFC4C4C4);
   static Color textDisable = const Color(0xFFC4C4C4);
   static Color textEnable = const Color(0xFF09051C);
   static Color success = const Color(0xFF53E88B);
+
+  static Color coba = const Color(0xFFC5AD89);
+  static Color coba2 = const Color(0xFFA28354);
+  static Color coba3 = const Color(0xFFADAF9A);
 }

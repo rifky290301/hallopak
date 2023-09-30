@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hallopak/app/data/core/static/firestore_var.dart';
 import 'package:hallopak/app/data/models/user_model.dart';
@@ -26,6 +28,7 @@ class UserProvider {
       var result = await _firestore.collection(FirestoreVar.users).where('email', isEqualTo: email).get().then(
             (value) => value.docs.first,
           );
+      inspect(result.data());
       return UserModel.fromJson(result.data());
     } catch (e) {
       errorSnackbar(e.toString());
@@ -38,7 +41,7 @@ class UserProvider {
       var result = await _firestore.collection(FirestoreVar.users).where('role', isEqualTo: role).get();
       return result.docs.map((e) => UserModel.fromJson(e.data())).toList();
     } catch (e) {
-      errorSnackbar(e.toString());
+      errorSnackbar('Error get users: $e');
       return [];
     }
   }

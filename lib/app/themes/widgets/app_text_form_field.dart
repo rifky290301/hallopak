@@ -18,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
   final bool? isRequired;
   final TextInputType? keyboardType;
   final int? maxLength;
+  final bool? readOnly;
   const AppTextFormField({
     Key? key,
     required this.controller,
@@ -32,6 +33,7 @@ class AppTextFormField extends StatelessWidget {
     this.isRequired,
     this.keyboardType,
     this.maxLength,
+    this.readOnly,
   }) : super(key: key);
 
   @override
@@ -46,6 +48,7 @@ class AppTextFormField extends StatelessWidget {
         child: TextFormField(
           // maxLength: maxLength,
           // inputFormatters: [if (keyboardType == TextInputType.number) FilteringTextInputFormatter.digitsOnly],
+          readOnly: readOnly ?? false,
           textInputAction: textInputAction ?? TextInputAction.next,
           enabled: enabled ?? true,
           obscureText: obscureText,

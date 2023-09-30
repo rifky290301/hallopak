@@ -29,4 +29,9 @@ class AppTextStyle {
     fontFamily: AppFonts.bentonSansBook,
     color: AppColors.textEnable,
   );
+  static TextStyle textHome = TextStyle(
+    fontSize: 12,
+    fontFamily: AppFonts.header,
+    color: AppColors.textEnable,
+  );
 }

@@ -8,6 +8,8 @@ import 'package:hallopak/app/themes/widgets/app_date_field.dart';
 import 'package:hallopak/app/themes/widgets/app_decoration.dart';
 import 'package:hallopak/app/themes/widgets/app_header.dart';
 import 'package:hallopak/app/themes/widgets/app_money_input.dart';
+import 'package:hallopak/app/themes/widgets/app_time_field.dart';
+import 'package:hallopak/app/utils/check_digit.dart';
 
 import '../../../../themes/constants/app_colors.dart';
 import '../../../../themes/constants/app_size.dart';
@@ -34,6 +36,7 @@ class AgreementFormView extends GetView<AgreementFormController> {
                 child: Form(
                   key: controller.globarKey,
                   child: ListView(
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(left: AppSize.medium, right: AppSize.medium, bottom: AppSize.medium),
                     children: [
                       Text(
@@ -41,18 +44,18 @@ class AgreementFormView extends GetView<AgreementFormController> {
                         style: AppTextStyle.textMedium.copyWith(color: AppColors.primary),
                       ),
                       const SizedBox(height: AppSize.semiLarge),
-                      Text('Warga', style: AppTextStyle.textMedium),
+                      Text('Nama Warga', style: AppTextStyle.textMedium),
                       AppTextFormField(
                         controller: controller.wargaTEC!,
-                        hintText: 'Warga',
+                        hintText: 'Nama Warga',
                         validator: FormValidator.commonString,
                         paddingBottom: AppSize.small,
                         paddingTop: AppSize.micro / 2,
                       ),
-                      Text('Satpam', style: AppTextStyle.textMedium),
+                      Text('Nama Satpam', style: AppTextStyle.textMedium),
                       AppTextFormField(
                         controller: controller.satpamTEC!,
-                        hintText: 'Satpam',
+                        hintText: 'Nama Satpam',
                         validator: FormValidator.commonString,
                         paddingBottom: AppSize.small,
                         paddingTop: AppSize.micro / 2,
@@ -87,14 +90,55 @@ class AgreementFormView extends GetView<AgreementFormController> {
                           controller.tanggalKontrakSelesai = Timestamp.fromDate(date);
                         },
                       ),
-                      Text('Jam Kerja', style: AppTextStyle.textMedium),
-                      AppTextFormField(
-                        controller: controller.jamKerjaTEC!,
-                        hintText: 'Jam Kerja',
-                        keyboardType: TextInputType.number,
-                        validator: FormValidator.commonString,
-                        paddingBottom: AppSize.small,
-                        paddingTop: AppSize.micro / 2,
+                      // Text('Jam Kerja', style: AppTextStyle.textMedium),
+                      // AppTextFormField(
+                      //   controller: controller.jamKerjaTEC!,
+                      //   hintText: 'Jam Kerja',
+                      //   keyboardType: TextInputType.number,
+                      //   validator: FormValidator.commonString,
+                      //   paddingBottom: AppSize.small,
+                      //   paddingTop: AppSize.micro / 2,
+                      // ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Jam Kerja Mulai', style: AppTextStyle.textMedium),
+                                AppTimeField(
+                                  controller: controller.jamKerjaMulaiTEC!,
+                                  hintText: 'Jam Kerja Mulai',
+                                  paddingBottom: AppSize.small,
+                                  paddingTop: AppSize.micro / 2,
+                                  onSelectedTime: (TimeOfDay? date) {
+                                    controller.jamKerjaMulaiTEC!.text =
+                                        '${tambahkanNolDiDepan(date!.hour)} : ${tambahkanNolDiDepan(date.minute)}';
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: AppSize.micro),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Jam Kerja Berakhir', style: AppTextStyle.textMedium),
+                                AppTimeField(
+                                  controller: controller.jamKerjaBerakhirTEC!,
+                                  hintText: 'Jam Kerja Berakhir',
+                                  paddingBottom: AppSize.small,
+                                  paddingTop: AppSize.micro / 2,
+                                  onSelectedTime: (TimeOfDay? date) {
+                                    controller.jamKerjaBerakhirTEC!.text =
+                                        '${tambahkanNolDiDepan(date!.hour)} : ${tambahkanNolDiDepan(date.minute)}';
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                       Text('Gaji', style: AppTextStyle.textMedium),
                       AppMonayInput(

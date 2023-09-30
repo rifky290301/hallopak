@@ -4,7 +4,7 @@ class AppDecoration {
   static BoxDecoration get appHeader => const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/image/bg_appbar.png'),
-          opacity: 0.2,
+          opacity: 0,
           alignment: Alignment.topCenter,
         ),
       );

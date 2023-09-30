@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'app/config/inital_binding.dart';
 import 'app/data/providers/local_storage.dart';
 import 'app/routes/app_pages.dart';
+import 'app/themes/constants/app_colors.dart';
 import 'firebase_options.dart';
 import 'firebase_options_dev.dart';
 import 'flavors.dart';
@@ -32,9 +33,10 @@ class App extends StatelessWidget {
       title: "Hallopak",
       initialRoute: AppPages.INITIAL,
       initialBinding: InitialBinding(),
+      debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFFEFEFF),
+        scaffoldBackgroundColor: AppColors.coba3,
       ),
     );
   }

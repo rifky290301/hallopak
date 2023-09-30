@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hallopak/app/data/models/profile_model.dart';
 import 'package:hallopak/app/data/models/user_model.dart';
-import 'package:hallopak/app/routes/app_pages.dart';
 import 'package:hallopak/app/themes/constants/app_colors.dart';
 import 'package:hallopak/app/themes/constants/app_size.dart';
 import 'package:hallopak/app/themes/extensions/app_text_style.dart';
@@ -24,21 +23,24 @@ class FormProfileView extends GetView<FormProfileController> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/image/bg_login2.png'),
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.topCenter,
-            ),
-          ),
+          // decoration: const BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage('assets/images/image/bg_login2.png'),
+          //     fit: BoxFit.fitWidth,
+          //     alignment: Alignment.topCenter,
+          //   ),
+          // ),
           child: Column(
             children: [
               SizedBox(
                 height: Get.height * 0.1,
               ),
-              Image.asset(
-                'assets/images/logo/logo_hallopak.png',
-                width: 200,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image.asset(
+                  'assets/images/logo/logo_hallopak.png',
+                  width: 200,
+                ),
               ),
               Form(
                 key: controller.globarKey,
@@ -118,6 +120,7 @@ class FormProfileView extends GetView<FormProfileController> {
                       controller: controller.tanggalLahirTEC!,
                       hintText: 'Tanggal Lahir',
                       // paddingBottom: AppSize.small,
+                      validator: FormValidator.commonString,
                       paddingTop: AppSize.micro / 2,
                       onSelectedDate: (DateTime? date) {
                         controller.tanggalLahirTEC!.text = '${date!.day} - ${date.month} - ${date.year}';
@@ -168,6 +171,16 @@ class FormProfileView extends GetView<FormProfileController> {
                         },
                       ),
                     ),
+                    GetBuilder<FormProfileController>(
+                      id: 'required',
+                      init: controller,
+                      builder: (_) {
+                        return Text(
+                          'Tidak boleh kosong',
+                          style: AppTextStyle.textRegular.copyWith(color: AppColors.danger),
+                        );
+                      },
+                    ),
                     if (controller.local.user.role == SATPAM) ...[
                       const SizedBox(height: AppSize.small),
                       Text('Sertifikat', style: AppTextStyle.textMedium),
@@ -213,6 +226,16 @@ class FormProfileView extends GetView<FormProfileController> {
                           },
                         ),
                       ),
+                      GetBuilder<FormProfileController>(
+                        id: 'required',
+                        init: controller,
+                        builder: (_) {
+                          return Text(
+                            'Tidak boleh kosong',
+                            style: AppTextStyle.textRegular.copyWith(color: AppColors.danger),
+                          );
+                        },
+                      ),
                     ],
                     const SizedBox(height: AppSize.largest),
                     SizedBox(
@@ -231,18 +254,18 @@ class FormProfileView extends GetView<FormProfileController> {
                   ],
                 ),
               ),
-              TextButton(
-                child: Text(
-                  'Lewati',
-                  style: AppTextStyle.textMedium.copyWith(
-                    color: AppColors.primary,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-                onPressed: () {
-                  Get.toNamed(Routes.HOME);
-                },
-              ),
+              // TextButton(
+              //   child: Text(
+              //     'Lewati',
+              //     style: AppTextStyle.textMedium.copyWith(
+              //       color: AppColors.primary,
+              //       decoration: TextDecoration.underline,
+              //     ),
+              //   ),
+              //   onPressed: () {
+              //     Get.toNamed(Routes.HOME);
+              //   },
+              // ),
             ],
           ),
         ),

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hallopak/app/data/models/conversation_model.dart';
 import 'package:hallopak/app/data/models/user_model.dart';
+import 'package:hallopak/app/modules/chat/conversation/views/ulasan_view.dart';
 import 'package:hallopak/app/themes/constants/app_colors.dart';
 import 'package:hallopak/app/themes/constants/app_size.dart';
 import 'package:hallopak/app/themes/extensions/app_text_style.dart';
+import 'package:hallopak/app/themes/widgets/app_button.dart';
 import 'package:hallopak/app/themes/widgets/app_decoration.dart';
 import 'package:hallopak/app/themes/widgets/app_header.dart';
 import 'package:hallopak/app/utils/snackbar_app.dart';
@@ -60,34 +62,68 @@ class ConvertationView extends GetView<ConversationController> {
                 AppHeader.appBack,
                 const Spacer(),
                 GetBuilder<ConversationController>(
+                  id: 'agreement_form',
                   init: controller,
                   builder: (_) {
                     return Container(
-                      height: 45,
-                      width: 45,
+                      // height: 45,
+                      // width: 45,
                       margin: const EdgeInsets.only(right: AppSize.medium),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppSize.small),
-                        color: const Color(0xFFFDF5ED),
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          if (_.user.role == SATPAM) {
-                            Get.to(() => SeeFormView(), arguments: _.chatModel);
-                          } else {
-                            // Get.to(() => AgreementFormView());
-                            if (!controller.chatModel!.isAcc!) {
-                              Get.to(() => AgreementFormView());
-                            } else {
-                              infoSnackbar('Form sudah diisi');
-                            }
-                          }
-                        },
-                        icon: Icon(
-                          _.user.role == SATPAM ? Icons.remove_red_eye : Icons.more_vert,
-                          color: const Color(0xFFDA6317),
-                        ),
-                      ),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.circular(AppSize.small),
+                      //   color: const Color(0xFFFDF5ED),
+                      // ),
+                      // child: IconButton(
+                      //   onPressed: () {
+                      //     if (_.user.role == SATPAM) {
+                      //       Get.to(() => SeeFormView(), arguments: _.chatModel);
+                      //     } else {
+                      //       // Get.to(() => AgreementFormView());
+                      //       if (!controller.chatModel!.isAcc!) {
+                      //         Get.to(() => AgreementFormView());
+                      //       } else {
+                      //         infoSnackbar('Form sudah diisi');
+                      //       }
+                      //     }
+                      //   },
+                      //   icon: Icon(
+                      //     _.user.role == SATPAM ? Icons.remove_red_eye : Icons.paste_rounded,
+                      //     color: const Color(0xFFDA6317),
+                      //   ),
+                      // ),
+                      child: _.user.role == SATPAM
+                          ? AppButton(
+                              text: 'Contract',
+                              width: 102,
+                              onPressed: () {
+                                Get.to(() => SeeFormView(), arguments: _.chatModel);
+                              },
+                            )
+                          : Row(
+                              children: [
+                                if (_.chatModel?.isAcc ?? false) ...[
+                                  AppButton(
+                                    text: 'Ulasan',
+                                    width: 92,
+                                    onPressed: () {
+                                      Get.to(() => UlasanView(), arguments: _.chatModel);
+                                    },
+                                  ),
+                                ],
+                                const SizedBox(width: 2),
+                                AppButton(
+                                    text: 'Form',
+                                    width: 82,
+                                    onPressed: () {
+                                      if (!controller.isAnyForm) {
+                                        Get.to(() => AgreementFormView());
+                                      } else {
+                                        Get.to(() => SeeFormView(), arguments: _.chatModel);
+                                        infoSnackbar('Form sudah diisi');
+                                      }
+                                    }),
+                              ],
+                            ),
                     );
                   },
                 ),
@@ -111,7 +147,7 @@ class ConvertationView extends GetView<ConversationController> {
                             return BubbleNormal(
                               text: data.pesan ?? '',
                               isSender: data.pengirim == controller.user.email,
-                              color: AppColors.primary,
+                              color: AppColors.coba2,
                               textStyle: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -137,7 +173,7 @@ class ConvertationView extends GetView<ConversationController> {
                               fillColor: AppColors.secondary,
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: const BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(color: AppColors.primary),
+                                borderSide: BorderSide(color: AppColors.coba2),
                               ),
                               border: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
@@ -152,7 +188,7 @@ class ConvertationView extends GetView<ConversationController> {
                           height: 64,
                           width: 64,
                           decoration: BoxDecoration(
-                            color: AppColors.primary,
+                            color: AppColors.coba2,
                             borderRadius: const BorderRadius.all(
                               Radius.circular(120),
                             ),
